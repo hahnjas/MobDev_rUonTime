@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.ruontime"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".SplashScreen"
+            android:theme="@style/Theme.NoTitle"  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Ruontime"
+            android:label="@string/app_name" >
+        </activity>      
+        <activity android:name=".Login"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.android.ruontime.RUONTIME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Tabs"
+            android:label="@string/app_name" >
+        </activity> 
+        <activity
+            android:name=".Statistics"
+            android:label="@string/app_name" >
+        </activity> 
+        <activity
+            android:name=".Settings"
+            android:label="@string/app_name" >
+        </activity> 
+        <receiver android:name=".service.Reminder"></receiver>
+        
+
+        
+    </application>
+
+</manifest>
