@@ -6,18 +6,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 </h:head>
 <h:body>
 <h:form id="form">  
 ssssssssssssssssssssssssssssssss
-    <h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show()" title="login">   
-        <p:graphicImage value="/images/login.png" />  
-    </h:outputLink>  
   
     <p:growl id="growl" showDetail="true" life="3000" />  
   
-    <p:dialog id="dialog" header="Login" widgetVar="dlg" resizable="false">  
   
         <h:panelGrid columns="2" cellpadding="5">  
             <h:outputLabel for="username" value="Username:" />  
@@ -35,19 +32,8 @@ ssssssssssssssssssssssssssssssss
             </f:facet>  
         </h:panelGrid>  
           
-    </p:dialog>  
 </h:form>  
   
-<script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if(args.validationFailed || !args.loggedIn) {  
-            PF('dlg').jq.effect("shake", { times:5 }, 100);  
-        }   
-        else {  
-            PF('dlg').hide();  
-            $('#loginLink').fadeOut();  
-        }  
-    }  
-</script>
+
 </h:body>
 </html> 
