@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+<h:form id="form">  
+
+    <p:growl id="growl" showDetail="true" life="3000" />  
+  
+    <p:dialog id="dialog" header="Create new Meeting" widgetVar="dlg" resizable="false">  
+  
+        <h:panelGrid columns="2" cellpadding="5">  
+        
+        	 <h:outputLabel value="Title: " />  
+            <p:inputText value="#{newMeetingBean.newMeeting.title}"   
+                    id="title" required="true" label="title" />  
+        
+            <h:outputLabel value="Start Time:" />  
+            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" required="true"/>
+            
+            <h:outputLabel value="End Time:" />  
+            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" />
+              
+              
+            <f:facet name="footer">  
+                <p:commandButton id="submitButton" value="Create" update="growl"   
+                    actionListener="#{newMeetingBean.create}"/>  
+            </f:facet>  
+        </h:panelGrid>  
+          
+    </p:dialog>  
+</h:form>  
+  
+<script type="text/javascript">  
+    function handleLoginRequest(xhr, status, args) {  
+        if(args.validationFailed || !args.loggedIn) {  
+            PF('dlg').jq.effect("shake", { times:5 }, 100);  
+        }   
+        else {  
+            PF('dlg').hide();  
+            $('#loginLink').fadeOut();  
+        }  
+    }  
+</script>
+
+</h:body>
+</html> 
