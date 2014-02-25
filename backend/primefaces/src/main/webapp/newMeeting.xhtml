@@ -26,6 +26,8 @@
             <h:outputLabel value="End Time:" />  
             <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" />
               
+            <p:commandButton value="create"
+			action="#{newMeetingBean.create}"></p:commandButton>
               
             <f:facet name="footer">  
                 <p:commandButton id="submitButton" value="Create" update="growl"   
