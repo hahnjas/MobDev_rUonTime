@@ -18,7 +18,7 @@ import se.kth.mobdev.ruontime.model.Meeting;
 @ManagedBean(name = "newMeetingBean")
 public class NewMeetingBean {
 	
-	@ManagedProperty(value = "persistence")
+//	@ManagedProperty(value = "persistence")
 	Persistance store;
 
 	private Meeting newMeeting;

@@ -21,7 +21,7 @@ public class Group {
 	private List<Meeting> meetings;
 	
 	
-	public void Group(String name, User supervisor) {
+	public Group(String name, User supervisor) {
 		this.name = name;
 		
 		this.supervisors = new ArrayList<User>();
@@ -75,6 +75,10 @@ public class Group {
 	
 	public void removeMeeting(Meeting meeting) {
 		this.meetings.remove(meeting);
+	}
+	
+	public String toString(){
+		return this.name;
 	}
 	
 }

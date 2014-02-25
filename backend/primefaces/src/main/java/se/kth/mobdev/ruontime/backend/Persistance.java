@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import se.kth.mobdev.ruontime.model.Meeting;
 
 
-@ManagedBean(name="persistance")
+@ManagedBean(name="persistence")
 @ApplicationScoped
 public class Persistance implements IStorage {
 

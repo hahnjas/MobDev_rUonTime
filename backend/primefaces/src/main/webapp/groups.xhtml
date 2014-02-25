@@ -9,45 +9,44 @@
 <h:head>
 </h:head>
 <h:body>
-<h:form id="form">  
+	<h:form id="form">
 
-    <p:growl id="growl" showDetail="true" life="3000" />  
-  
-    <p:dialog id="dialog" header="Create new Meeting" widgetVar="dlg" resizable="false">  
-  
-        <h:panelGrid columns="2" cellpadding="5">  
-        
-        	 <h:outputLabel value="Title: " />  
-            <p:inputText value="#{newMeetingBean.newMeeting.title}"   
-                    id="title" required="true" label="title" />  
-        
-            <h:outputLabel value="Start Time:" />  
-            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" required="true"/>
-            
-            <h:outputLabel value="End Time:" />  
-            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" />
-              
-              
-            <f:facet name="footer">  
-                <p:commandButton id="submitButton" value="Create" update="growl"   
-                    actionListener="#{newMeetingBean.create}"/>  
-            </f:facet>  
-        </h:panelGrid>  
-          
-    </p:dialog>  
-</h:form>  
-  
-<script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if(args.validationFailed || !args.loggedIn) {  
-            PF('dlg').jq.effect("shake", { times:5 }, 100);  
-        }   
-        else {  
-            PF('dlg').hide();  
-            $('#loginLink').fadeOut();  
-        }  
-    }  
-</script>
+		<ui:include src="/include/menu.xhtml" />
+		<p:growl id="messages" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<h:outputLabel value="Title: " />
+
+			<p:pickList id="pojoPickList" value="#{groupsBean.allGroups}"
+				var="group" effect="bounce" itemValue="#{group}"
+				itemLabel="#{group.name}" converter="groupConverter"
+				showSourceControls="true" showTargetControls="true"
+				showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+				filterMatchMode="contains">
+
+				<f:facet name="sourceCaption">Available</f:facet>
+				<f:facet name="targetCaption">To Edit</f:facet>
+
+				<p:column>  
+            			#{group.name}  
+        			</p:column>
+
+			</p:pickList>
+
+			<p:commandButton id="groupSubmit" value="Submit"
+				style="margin-top:5px" />
+
+			<f:facet name="footer">
+				<p:commandButton id="submitButton" value="Save" update="growl"
+					actionListener="#{newMeetingBean.create}" />
+			</f:facet>
+		</h:panelGrid>
+	</h:form>
+
+	<script type="text/javascript">
+		
+	</script>
 
 </h:body>
-</html> 
+</html>
