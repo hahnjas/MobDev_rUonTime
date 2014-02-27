@@ -3,11 +3,22 @@
  */
 package se.kth.mobdev.ruontime.model;
 
+import java.util.UUID;
+
+import javax.persistence.Id;
+
+import se.kth.mobdev.ruontime.persistence.IEntity;
+
 /**
  * @author Jasper
  *
  */
-public class User {
+public class User implements IEntity{
+
+	private static final long serialVersionUID = 8580240078002020951L;
+
+	@Id
+	private UUID id;
 
 	private String username;
 	
@@ -66,6 +77,16 @@ public class User {
 
 	public void setPwHash(String pwHash) {
 		this.pwHash = pwHash;
+	}
+	
+	@Override
+	public UUID getId() {
+		return this.id;
+	}
+
+	@Override
+	public void setId(UUID id) {
+		this.id = id;
 	}
 	
 }

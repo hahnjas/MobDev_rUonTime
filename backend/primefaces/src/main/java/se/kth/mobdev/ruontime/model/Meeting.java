@@ -6,12 +6,23 @@ package se.kth.mobdev.ruontime.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.Id;
+
+import se.kth.mobdev.ruontime.persistence.IEntity;
 
 /**
  * @author Jasper
  *
  */
-public class Meeting {
+public class Meeting implements IEntity{
+
+	private static final long serialVersionUID = -4163119070210143402L;
+
+	@Id
+	private UUID id;
+
 
 	private Group associatedGroup;
 	
@@ -101,9 +112,13 @@ public class Meeting {
 		return guests;
 	}
 	
+	public UUID getId() {
+		return id;
+	}
 	
-	
-	
+	public void setId(UUID id) {
+		this.id = id;
+	}
 	
 	
 }

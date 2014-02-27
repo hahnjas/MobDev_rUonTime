@@ -5,12 +5,22 @@ package se.kth.mobdev.ruontime.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import se.kth.mobdev.ruontime.persistence.IEntity;
 
 /**
  * @author Jasper
  *
  */
-public class Group {
+@Entity
+public class Group implements IEntity{
+
+	@Id
+	private UUID id;
 
 	private String name;
 	
@@ -79,6 +89,14 @@ public class Group {
 	
 	public String toString(){
 		return this.name;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 	
 }

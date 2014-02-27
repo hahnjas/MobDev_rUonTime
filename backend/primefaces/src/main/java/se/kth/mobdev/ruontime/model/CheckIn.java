@@ -4,12 +4,25 @@
 package se.kth.mobdev.ruontime.model;
 
 import java.util.Calendar;
+import java.util.UUID;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import se.kth.mobdev.ruontime.persistence.IEntity;
 
 /**
  * @author Jasper
  *
  */
-public class CheckIn {
+@Entity
+public class CheckIn implements IEntity{
+
+	@Id
+	private UUID uId;
+	
+	private static final long serialVersionUID = -6540274176773646199L;
+
 	
 	private User associatedUser;
 	
@@ -50,6 +63,16 @@ public class CheckIn {
 
 	public boolean isLastToShowUp() {
 		return lastToShowUp;
+	}
+
+	@Override
+	public UUID getId() {
+		return this.uId;
+	}
+
+	@Override
+	public void setId(UUID id) {
+		this.uId = id;
 	}
 
 }
