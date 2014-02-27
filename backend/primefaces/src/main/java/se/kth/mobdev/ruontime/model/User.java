@@ -27,6 +27,8 @@ public class User implements IEntity{
 	private String firstName;
 	private String lastName;
 	
+	private int age;
+	
 
 	public User(String firstName, String lastName, int age) {
 		super();
@@ -87,6 +89,14 @@ public class User implements IEntity{
 	@Override
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
 }

@@ -9,45 +9,44 @@
 <h:head>
 </h:head>
 <h:body>
-<h:form id="form">  
+	<h:form id="form">
 
-    <p:growl id="growl" showDetail="true" life="3000" />  
-  
-    <p:dialog id="dialog" header="Create new Meeting" widgetVar="dlg" resizable="false">  
-  
-        <h:panelGrid columns="2" cellpadding="5">  
-        
-        	 <h:outputLabel value="Title: " />  
-            <p:inputText value="#{newMeetingBean.newMeeting.title}"   
-                    id="title" required="true" label="title" />  
-        
-            <h:outputLabel value="Start Time:" />  
-            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" required="true"/>
-            
-            <h:outputLabel value="End Time:" />  
-            <p:calendar value="#{newMeetingBean.newMeeting.startsAt}" pattern="MM/dd/yyyy HH:mm" />
-              
-              
-            <f:facet name="footer">  
-                <p:commandButton id="submitButton" value="Create" update="growl"   
-                    actionListener="#{newMeetingBean.create}"/>  
-            </f:facet>  
-        </h:panelGrid>  
-          
-    </p:dialog>  
-</h:form>  
-  
-<script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if(args.validationFailed || !args.loggedIn) {  
-            PF('dlg').jq.effect("shake", { times:5 }, 100);  
-        }   
-        else {  
-            PF('dlg').hide();  
-            $('#loginLink').fadeOut();  
-        }  
-    }  
-</script>
+		<ui:include src="/include/menu.xhtml" />
+		<p:growl id="growl" />
+<br/>
+		<p:dataTable id="dataTable" var="user" value="#{statisticsBean.allUsers}"
+			paginator="true" rows="10"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+			<f:facet name="header">  
+           Select User for which you would like to access statistics
+        </f:facet>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="username" />
+				</f:facet>
+				<h:outputText value="#{user.username}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="First Name" />
+				</f:facet>
+				<h:outputText value="#{user.firstName}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Last Name" />
+				</f:facet>
+				<h:outputText value="#{user.lastName}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
 
 </h:body>
-</html> 
+</html>
