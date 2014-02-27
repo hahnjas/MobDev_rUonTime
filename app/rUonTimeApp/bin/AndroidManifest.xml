@@ -8,6 +8,8 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     
     <application
         android:allowBackup="true"
@@ -46,7 +48,43 @@
         </activity> 
         <receiver android:name=".service.Reminder"></receiver>
         
+		<activity
+    android:name="com.google.zxing.client.android.CaptureActivity"
+    android:configChanges="orientation|keyboardHidden"
+    android:screenOrientation="landscape"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:windowSoftInputMode="stateAlwaysHidden" >
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="com.google.zxing.client.android.SCAN" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+	</activity>
+	<activity android:name=".About_us" 
+			android:theme="@android:style/Theme.Dialog">
+			<intent-filter>
+				<action android:name="com.android.ruontime.ABOUT" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+	</activity>
+	<activity android:name=".Help"
+			android:theme="@android:style/Theme.Dialog">
+			<intent-filter>
+				<action android:name="com.android.ruontime.HELP" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+	</activity>
+	<activity android:name="com.android.ruontime.database.SQLView">
+			<intent-filter>
+				<action android:name="com.android.ruontime.SQLVIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+	</activity>
         
     </application>
 

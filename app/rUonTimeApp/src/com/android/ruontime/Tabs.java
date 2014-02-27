@@ -1,5 +1,6 @@
 package com.android.ruontime;
 
+
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
@@ -40,7 +41,7 @@ public class Tabs extends TabActivity {
 		mTabHost.addTab(spec);
 		
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -53,10 +54,14 @@ public class Tabs extends TabActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.help:
+			Intent i1 = new Intent("com.android.ruontime.HELP");
+			startActivity(i1);
 			return true;
 		case R.id.about_us:
+			Intent i2 = new Intent("com.android.ruontime.ABOUT");
+			startActivity(i2);
 			return true;
-		case R.id.quit:
+		case R.id.exit:
 			finish();
 			return true;
 		default:

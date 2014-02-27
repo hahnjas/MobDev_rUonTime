@@ -4,6 +4,8 @@ import java.text.Format;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.android.ruontime.database.Database;
+import com.android.ruontime.model.NextEvent;
 import com.android.ruontime.service.Reminder;
 
 
@@ -19,7 +21,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.text.format.DateFormat;
+import android.util.Log;
 
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,20 +47,37 @@ public class Ruontime extends Activity {
 		
 		/*Save this somewhere
 		String uname = getIntent().getExtras().getString("USERNAME");
-        String upass = getIntent().getExtras().getString("PASSWORD");*/
-		
+        String upass = getIntent().getExtras().getString("PASSWORD");*/		
 		DisplayInfo();
 		Reminder.restart(getApplicationContext());
-		/*
-		Intent intent = new Intent(getBaseContext(), Reminder.class);
-	    final PendingIntent sender = PendingIntent.getBroadcast(
-	         this, 192837, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-	    
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+30000, sender);
-        Toast.makeText(getBaseContext(), 
-                "Phone Mode Will Be Changed Automatically !",Toast.LENGTH_LONG).show();*/
-
+	}
+	
+	public void scanNow(View view){
+		Intent intent = new Intent("com.google.zxing.client.android.SCAN"); 
+		intent.putExtra("com.google.zxing.client.android.SCAN.SCAN_MODE", "QR_CODE_MODE"); 
+		startActivityForResult(intent, 0);
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent intent){
+		if(requestCode == 0)     {
+			if(resultCode == RESULT_OK)         
+			{	String contents = intent.getStringExtra("SCAN_RESULT");
+				NextEvent event = new NextEvent(getContentResolver());
+				Long time = event.getEvent_date() - System.currentTimeMillis();
+				long mins = time / 60000;
+				Database entry = new Database(Ruontime.this);
+				entry.open();
+				entry.createEntry(contents, String.valueOf(mins));
+				entry.close();
+			
+				Toast.makeText(getBaseContext(), 
+		                "you have successfully checked-in",Toast.LENGTH_SHORT).show();  
+				}         
+			else{  
+				Toast.makeText(getBaseContext(), 
+		                "You didn't check-in, try again!",Toast.LENGTH_SHORT).show() ;
+					}
+			}
 	}
 	
 	@Override
