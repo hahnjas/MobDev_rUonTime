@@ -1,6 +1,5 @@
 package se.kth.mobdev.ruontime.persistence;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -10,11 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.internal.CriteriaImpl;
 
-
-public class GenericDao<T extends IEntity>  {
+public class GenericDao<T extends IEntity> implements IGenericDao<T>  {
 
   private EntityManager entityManager;
 
@@ -45,7 +41,6 @@ private String tableName;
    * 
    * @param clazz class with will be accessed by DAO methods
    */
-  @SuppressWarnings(value = "unchecked")
   public GenericDao(Class<T> clazz) {
     this.clazz = clazz;
   }
@@ -59,7 +54,10 @@ private String tableName;
     this.entityManager = entityManager;
   }
 
-  @SuppressWarnings(value = "unchecked")
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#load(java.util.UUID)
+ */
+@Override
   public T load(UUID id) throws EntityNotFoundException {
     T entity = get(id);
     if (entity == null) {
@@ -68,14 +66,21 @@ private String tableName;
     return entity;
   }
 
-  @SuppressWarnings(value = "unchecked")
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#get(java.util.UUID)
+ */
+@Override
   public T get(UUID id) {
     return (T) entityManager.find(clazz, id);
   }
 
 
 
-  @SuppressWarnings(value = "unchecked")
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#getAll()
+ */
+@Override
+@SuppressWarnings(value = "unchecked")
   public List<T> getAll() {
 	  Query query = entityManager.createQuery("SELECT e FROM "+ this.tableName +" e");
 	  return (List<T>) query.getResultList();
@@ -83,7 +88,11 @@ private String tableName;
 
 
 
-  public T save(final T object) {
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#save(T)
+ */
+@Override
+public T save(final T object) {
     if (object.getId() != null) {
       return entityManager.merge(object);
     } else {
@@ -92,7 +101,11 @@ private String tableName;
     }
   }
 
-  public void save(final T... objects) {
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#save(T)
+ */
+@Override
+public void save(final T... objects) {
     for (T object : objects) {
       save(object);
     }
@@ -100,12 +113,20 @@ private String tableName;
 
 
 
-  public void delete(T object) throws UnsupportedOperationException {
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#delete(T)
+ */
+@Override
+public void delete(T object) throws UnsupportedOperationException {
 //    deleteAll(Arrays.asList(objects), true);
   }
 
 
-  public void refresh(final T entity) {
+  /* (non-Javadoc)
+ * @see se.kth.mobdev.ruontime.persistence.IGenericDao#refresh(T)
+ */
+@Override
+public void refresh(final T entity) {
     entityManager.refresh(entity);
   }
 

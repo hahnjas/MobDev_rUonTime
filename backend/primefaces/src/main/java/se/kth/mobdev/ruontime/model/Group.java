@@ -19,6 +19,8 @@ import se.kth.mobdev.ruontime.persistence.IEntity;
 @Entity
 public class Group implements IEntity{
 
+	private static final long serialVersionUID = -2341167406720386641L;
+
 	@Id
 	private UUID id;
 
@@ -97,6 +99,10 @@ public class Group implements IEntity{
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public void setParticipants(List<User> participants) {
+		this.participants = participants;
 	}
 	
 }

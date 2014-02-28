@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 
 import se.kth.mobdev.ruontime.model.Group;
 import se.kth.mobdev.ruontime.model.Meeting;
+import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 
 /**
  * @author Jasper
@@ -30,6 +31,7 @@ public class NewMeetingBean {
 	private Group selectedGroup;
 	
 	public String create(){
+		newMeeting.setAssociatedGroup(selectedGroup);
 		store.createNewMeeting(newMeeting);
 		return "welcome.xhtml";
 	}
@@ -52,6 +54,10 @@ public class NewMeetingBean {
 	
 	@PostConstruct
 	public void init(){
+		//fetch all Groups from DataBase
+		//allGroups = PersistenceFactory.getGroupDao().getAll();
+		
+		//FIXME, TESTING ONLY
 		allGroups = new ArrayList<Group>();
 		allGroups.add(new Group("group 1", null));
 		allGroups.add(new Group("group 2", null));

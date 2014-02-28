@@ -13,6 +13,7 @@ import org.primefaces.model.DualListModel;
 
 import se.kth.mobdev.ruontime.model.Group;
 import se.kth.mobdev.ruontime.model.User;
+import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 
 /**
  * @author Jasper
@@ -46,6 +47,11 @@ public class GroupsBean {
 	
 	@PostConstruct
 	public void init(){
+		//fetch all Groups from DataBase
+		//allGroups = PersistenceFactory.getGroupDao().getAll();
+		//allUsers = PersistenceFactory.getUserDao().getAll();
+		
+		//FIXME, TESTING ONLY
 		allGroups = new ArrayList<Group>();
 		allGroups.add(new Group("group 1", null));
 		allGroups.add(new Group("group 2", null));
@@ -63,6 +69,22 @@ public class GroupsBean {
 		
 	}
 
+	public void fetchUsersForGroup(){
+		//extract group members
+		List<User> participants = selectedGroup.getParticipants();
+		this.assignedUsers.setTarget(participants);
+		//remove members from list of all members
+		this.assignedUsers.getSource().removeAll(participants);
+	}
+	
+	public void saveChanges() {
+		//set updated list of members
+		List<User> newListofParticipants = this.assignedUsers.getTarget();
+		this.selectedGroup.setParticipants(newListofParticipants);
+		//persist changes
+		PersistenceFactory.getGroupDao().save(selectedGroup);
+	}
+	
 	public List<User> getAllUsers() {
 		return allUsers;
 	}

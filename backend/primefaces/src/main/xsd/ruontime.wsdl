@@ -33,7 +33,7 @@
 	</message>
 
 	<!-- Port that includes methods -->
-	<portType name="Authentication_PortType">
+	<portType name="CeckIns_PortType">
 		<operation name="Authentication_Step1">
 			<input message="tns:InitAuthentication" />
 			<output message="tns:AuthenticationChallenge" />
@@ -45,7 +45,7 @@
 		</operation>
 	</portType>
 
-	<binding name="rUonTime_Binding" type="tns:Authentication_PortType">
+	<binding name="rUonTime_Binding" type="tns:CeckIns_PortType">
 		<soap:binding style="rpc"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="Authentication_Step1">

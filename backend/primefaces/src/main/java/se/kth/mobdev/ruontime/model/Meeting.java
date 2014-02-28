@@ -119,6 +119,17 @@ public class Meeting implements IEntity{
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	
+
+	public void setAssociatedGroup(Group associatedGroup) {
+		this.associatedGroup = associatedGroup;
+	}
+
+	public void setShouldAttend(List<User> shouldAttend) {
+		this.shouldAttend = shouldAttend;
+	}
+
+	public void setGuests(List<User> guests) {
+		this.guests = guests;
+	}
 	
 }

@@ -44,12 +44,11 @@
 
 			</p:pickList>
 
-			<p:commandButton id="groupSubmit" value="Submit"
-				style="margin-top:5px" />
+
 
 			<f:facet name="footer">
-				<p:commandButton id="submitButton" value="Save" update="growl"
-					actionListener="#{newMeetingBean.create}" />
+				<p:commandButton id="submitButton" value="Save Changes" update="growl"
+					actionListener="#{groupsBean.saveChanges}" />
 			</f:facet>
 		</h:panelGrid>
 	</h:form>
