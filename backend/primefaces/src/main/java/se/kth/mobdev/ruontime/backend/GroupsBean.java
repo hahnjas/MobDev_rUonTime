@@ -24,20 +24,17 @@ public class GroupsBean {
 	
 //	@ManagedProperty(value = "persistence")
 	Persistance store;
+	
+	private DualListModel<User> assignedUsers;
 
-	private DualListModel<Group> allGroups;
+	private List<Group> allGroups;
 	
 	private Group selectedGroup;
 	
-	private DualListModel<User> allUsers;
+	private List<User> allUsers;
+	
+	private List<User> groupUsers;
 
-	public DualListModel<Group> getAllGroups() {
-		return allGroups;
-	}
-
-	public void setAllGroups(DualListModel<Group> allGroups) {
-		this.allGroups = allGroups;
-	}
 
 	public Group getSelectedGroup() {
 		return selectedGroup;
@@ -46,28 +43,56 @@ public class GroupsBean {
 	public void setSelectedGroup(Group selectedGroup) {
 		this.selectedGroup = selectedGroup;
 	}
-
-	public DualListModel<User> getAllUsers() {
-		return allUsers;
-	}
-
-	public void setAllUsers(DualListModel<User> allUsers) {
-		this.allUsers = allUsers;
-	}
-	
 	
 	@PostConstruct
 	public void init(){
-		List<Group> source = new ArrayList<Group>();
-		List<Group> target = new ArrayList<Group>();
-		source.add(new Group("group 1", null));
-		source.add(new Group("group 2", null));
-		source.add(new Group("group 3", null));
+		allGroups = new ArrayList<Group>();
+		allGroups.add(new Group("group 1", null));
+		allGroups.add(new Group("group 2", null));
+		allGroups.add(new Group("group 3", null));
 		Group group4 = new Group("group 4", null);
 		selectedGroup = group4;
-		source.add(group4);
-		this.allGroups =  new DualListModel<Group>(source, target); 
+		allGroups .add(group4);
 		
+		List<User> source = new ArrayList<User>();
+		source.add(new User("firstName", "lastName", 1));
+		source.add(new User("fasdairstName", "zlagergerstName", 12));
+		source.add(new User("firstdqwfwqName", "aaalastName", 21));
+		List<User> target = new ArrayList<User>();
+		this.setAssignedUsers(new DualListModel<User>(source, target)); 
+		
+	}
+
+	public List<User> getAllUsers() {
+		return allUsers;
+	}
+
+	public void setAllUsers(List<User> allUsers) {
+		this.allUsers = allUsers;
+	}
+
+	public List<User> getGroupUsers() {
+		return groupUsers;
+	}
+
+	public void setGroupUsers(List<User> groupUsers) {
+		this.groupUsers = groupUsers;
+	}
+
+	public DualListModel<User> getAssignedUsers() {
+		return assignedUsers;
+	}
+
+	public void setAssignedUsers(DualListModel<User> assignedUsers) {
+		this.assignedUsers = assignedUsers;
+	}
+
+	public List<Group> getAllGroups() {
+		return allGroups;
+	}
+
+	public void setAllGroups(List<Group> allGroups) {
+		this.allGroups = allGroups;
 	}
 	
 	

@@ -13,7 +13,7 @@
 	<ui:include src="/include/menu.xhtml" />
     <p:growl id="growl" showDetail="true" life="3000" />  
   
-  
+  <h:panelGrid columns="2" cellpadding="5">  
         <h:panelGrid columns="2" cellpadding="5">  
         
         	 <h:outputLabel value="Title: " />  
@@ -34,7 +34,17 @@
                     actionListener="#{newMeetingBean.create}"/>  
             </f:facet>  
         </h:panelGrid>  
-          
+        <h:outputLabel value="Select Group: " />
+			<p:selectOneListbox id="scroll" value="#{groupsBean.selectedGroup}"
+				converter="groupConverter" var="p" style="height:200px">
+				<f:selectItems value="#{groupsBean.allGroups}" var="group"
+					itemLabel="#{group.name}" itemValue="#{group}" />
+
+				<p:column>  
+                	#{p.name}   
+            	</p:column>
+			</p:selectOneListbox>
+     </h:panelGrid>    
 </h:form>  
   
 
