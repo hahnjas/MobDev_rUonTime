@@ -32,6 +32,8 @@ public class GroupsBean {
 	
 	private Group selectedGroup;
 	
+	private boolean showUserlist;
+	
 	private List<User> allUsers;
 	
 	private List<User> groupUsers;
@@ -50,6 +52,7 @@ public class GroupsBean {
 		//fetch all Groups from DataBase
 		//allGroups = PersistenceFactory.getGroupDao().getAll();
 		//allUsers = PersistenceFactory.getUserDao().getAll();
+		this.showUserlist = false;
 		
 		//FIXME, TESTING ONLY
 		allGroups = new ArrayList<Group>();
@@ -70,6 +73,7 @@ public class GroupsBean {
 	}
 
 	public void fetchUsersForGroup(){
+		this.showUserlist = true;
 		//extract group members
 		List<User> participants = selectedGroup.getParticipants();
 		this.assignedUsers.setTarget(participants);
@@ -79,10 +83,11 @@ public class GroupsBean {
 	
 	public void saveChanges() {
 		//set updated list of members
-		List<User> newListofParticipants = this.assignedUsers.getTarget();
-		this.selectedGroup.setParticipants(newListofParticipants);
+		System.out.println("the selected group: " + selectedGroup);
+		//List<User> newListofParticipants = this.assignedUsers.getTarget();
+		//this.selectedGroup.setParticipants(newListofParticipants);
 		//persist changes
-		PersistenceFactory.getGroupDao().save(selectedGroup);
+//		PersistenceFactory.getGroupDao().save(selectedGroup);
 	}
 	
 	public List<User> getAllUsers() {
@@ -115,6 +120,14 @@ public class GroupsBean {
 
 	public void setAllGroups(List<Group> allGroups) {
 		this.allGroups = allGroups;
+	}
+
+	public boolean isShowUserlist() {
+		return showUserlist;
+	}
+
+	public void setShowUserlist(boolean showUserlist) {
+		this.showUserlist = showUserlist;
 	}
 	
 	
