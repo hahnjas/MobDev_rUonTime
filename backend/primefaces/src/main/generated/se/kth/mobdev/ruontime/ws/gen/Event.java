@@ -12,7 +12,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -25,10 +27,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="userName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="groupName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="meetingId" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="authenticationHash" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *       &lt;/all>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,41 +42,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
 
 })
-@XmlRootElement(name = "CheckinDetails")
-public class CheckinDetails {
+@XmlRootElement(name = "Event")
+public class Event {
 
-    @XmlElement(required = true)
-    protected String userName;
     @XmlElement(required = true)
     protected String groupName;
     @XmlElement(required = true)
-    protected String meetingId;
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar start;
     @XmlElement(required = true)
-    protected String authenticationHash;
-
-    /**
-     * Gets the value of the userName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
-     * Sets the value of the userName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUserName(String value) {
-        this.userName = value;
-    }
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar end;
 
     /**
      * Gets the value of the groupName property.
@@ -102,51 +79,51 @@ public class CheckinDetails {
     }
 
     /**
-     * Gets the value of the meetingId property.
+     * Gets the value of the start property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public String getMeetingId() {
-        return meetingId;
+    public XMLGregorianCalendar getStart() {
+        return start;
     }
 
     /**
-     * Sets the value of the meetingId property.
+     * Sets the value of the start property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setMeetingId(String value) {
-        this.meetingId = value;
+    public void setStart(XMLGregorianCalendar value) {
+        this.start = value;
     }
 
     /**
-     * Gets the value of the authenticationHash property.
+     * Gets the value of the end property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public String getAuthenticationHash() {
-        return authenticationHash;
+    public XMLGregorianCalendar getEnd() {
+        return end;
     }
 
     /**
-     * Sets the value of the authenticationHash property.
+     * Sets the value of the end property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setAuthenticationHash(String value) {
-        this.authenticationHash = value;
+    public void setEnd(XMLGregorianCalendar value) {
+        this.end = value;
     }
 
 }
