@@ -3,6 +3,8 @@
  */
 package se.kth.mobdev.ruontime.backend;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +15,8 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.context.RequestContext;
 
 import se.kth.mobdev.ruontime.model.User;
+import se.kth.mobdev.ruontime.persistence.IGenericDao;
+import se.kth.mobdev.ruontime.persistence.PersistenceFactory;
 
 /**
  * @author Jasper
@@ -32,6 +36,14 @@ public class LoginBean {
 	@PostConstruct
 	public void init(){
 		System.out.println("LoginBean created!");
+		//retireve DAO to fetch user from DB
+		IGenericDao<User> userDao = PersistenceFactory.getUserDao();
+		User testUser =  new User("Jas", "H", 22);
+		userDao.save(testUser);
+		System.out.println("persisted user!");
+		
+		List<User> all = userDao.getAll();
+		System.out.println("all users in DB: " + all);
 	}
 
 	public String login() {  

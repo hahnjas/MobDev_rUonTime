@@ -1,17 +1,19 @@
 package se.kth.mobdev.ruontime.persistence;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 
 public class GenericDao<T extends IEntity> implements IGenericDao<T>  {
 
+	@PersistenceContext
   private EntityManager entityManager;
 
   private Class<T> clazz;
@@ -21,18 +23,20 @@ private String tableName;
   /**
    * Default constructor. Use for extend this class.
    */
-  @SuppressWarnings(value = "unchecked")
+//  @SuppressWarnings(value = "unchecked")
   public GenericDao() {
+	  EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("dswebapp");
+	   entityManager = entityManagerFactory.createEntityManager();
 
-    Type[] types = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments();
-
-    if (types[0] instanceof ParameterizedType) {
-      // If the class has parameterized types, it takes the raw type.
-      ParameterizedType type = (ParameterizedType) types[0];
-      clazz = (Class<T>) type.getRawType();
-    } else {
-      clazz = (Class<T>) types[0];
-    }
+//    Type[] types = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments();
+//
+//    if (types[0] instanceof ParameterizedType) {
+//      // If the class has parameterized types, it takes the raw type.
+//      ParameterizedType type = (ParameterizedType) types[0];
+//      clazz = (Class<T>) type.getRawType();
+//    } else {
+//      clazz = (Class<T>) types[0];
+//    }
   }
 
   /**
